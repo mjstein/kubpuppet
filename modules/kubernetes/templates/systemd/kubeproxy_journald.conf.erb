@@ -1,0 +1,7 @@
+[Service]
+ExecStart=
+ExecStart=-/bin/sh -c "/usr/bin/kube-proxy \
+	    $KUBE_PROXY_ARGS 2>&1 | /usr/bin/forward-journald -tag kube-proxy"
+StandardOutput=null
+StandardError=null
+KillMode=control-group

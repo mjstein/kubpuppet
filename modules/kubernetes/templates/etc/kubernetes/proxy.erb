@@ -1,0 +1,6 @@
+### file managed by puppet
+# kubernetes proxy config
+#
+
+# Add your own!
+KUBE_PROXY_ARGS="<%= scope.function_template(['kubernetes/_proxy.erb']) %>"

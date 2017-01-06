@@ -1,0 +1,6 @@
+### file managed by puppet
+# The following values are used to configure the kubernetes controller-manager
+#
+
+# Add your own!
+KUBE_CONTROLLER_MANAGER_ARGS="<%= scope.function_template(['kubernetes/_controller-manager.erb']) %>"

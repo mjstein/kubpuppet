@@ -1,0 +1,6 @@
+### file managed by puppet
+# kubernetes apiserver config
+#
+
+# Add your own!
+KUBE_API_ARGS="<%= scope.function_template(['kubernetes/_apiserver.erb']) %>"

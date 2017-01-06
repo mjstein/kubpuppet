@@ -1,0 +1,11 @@
+[Service]
+ExecStart=
+ExecStart=-/bin/sh -c "/usr/bin/kubelet \
+	    $KUBELET_ADDRESS \
+	    $KUBELET_PORT \
+	    $KUBELET_HOSTNAME \
+	    $KUBELET_API_SERVER \
+	    $KUBELET_ARGS 2>&1 | /usr/bin/forward-journald -tag kubelet"
+StandardOutput=null
+StandardError=null
+KillMode=control-group
