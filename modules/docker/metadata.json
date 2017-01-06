@@ -1,0 +1,47 @@
+{
+	"name": "cristifalcas-docker",
+	"version": "5.5.0",
+	"author": "Cristian Falcas",
+	"summary": "Module for installing and managing docker",
+	"license": "Apache-2.0",
+	"source": "https://github.com/cristifalcas/puppet-docker.git",
+	"project_page": "https://github.com/cristifalcas/puppet-docker",
+	"issues_url": "https://github.com/cristifalcas/puppet-docker/issues",
+	"tags": [ "DOCKER"
+	],
+	"operatingsystem_support": [{
+			"operatingsystem": "RedHat",
+			"operatingsystemrelease": [ "7"
+			]
+		},{
+			"operatingsystem": "CentOS",
+			"operatingsystemrelease": [ "7"
+			]
+		},{
+			"operatingsystem": "OracleLinux",
+			"operatingsystemrelease": [ "7"
+			]
+		},{
+			"operatingsystem": "Scientific",
+			"operatingsystemrelease": [ "7"
+			]
+		},{
+			"operatingsystem": "Fedora",
+			"operatingsystemrelease": [ "21"
+			]
+		}
+	],
+	"requirements": [{
+			"name": "pe",
+			"version_requirement": "3.7"
+		},{
+			"name": "puppet",
+			"version_requirement": "3.4"
+		}
+	],
+	"dependencies": [{
+			"name": "puppetlabs/stdlib",
+			"version_requirement": ">= 4.1.0"
+		}
+	]
+}
