@@ -7,7 +7,7 @@ class { 'kubernetes::master::apiserver':
   allow_privileged => true,
   service_cluster_ip_range => '10.100.5.0/24',
   etcd_servers => "http://127.0.0.1:2379",
-  etcd_prefix => '/atomic.io/network/config'
+  # etcd_prefix => '/atomic.io/network/config'
 }
  class { 'kubernetes::master::scheduler':
   master => 'http://127.0.0.1:8080',
