@@ -11,7 +11,7 @@ class kubernetes::minion($master_name=undef, $minion_name=undef, $alternate_flan
     kubernetes::core{'minion_core':
       master_name => $master_name,
       minion_name => $minion_name,
-      before      =>  File['/etc/kubernetes/kubelet.erb']
+      before      =>  File['/etc/kubernetes/kubelet']
     }
   }
   file{'/etc/kubernetes/kubelet':
