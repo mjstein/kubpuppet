@@ -22,7 +22,7 @@ class kubernetes::master($master_name = undef, $minion_name = undef,$alternate_f
   }
   file{'/etc/kubernetes/controller-manager':
     content => template('kubernetes/controller.erb'),
-    notify  => Service['kube-controller-manager']
+    notify  => Service['kube-controller-manager'],
     require =>  Package['kubernetes'],
     notify  =>  Service['kube-controller-manager'],
   }
