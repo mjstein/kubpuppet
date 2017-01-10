@@ -34,7 +34,6 @@ class kubernetes::master($master_name = undef, $minion_name = undef,$alternate_f
   service{['etcd', 'kube-apiserver', 'kube-controller-manager', 'kube-scheduler']:
     ensure => running,
     enable => true,
-    before => Service['flanneld']
   }->
 
   file{'/tmp/flannel-config.json':
