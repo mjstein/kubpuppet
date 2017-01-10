@@ -1,6 +1,12 @@
 class kubernetes::master($master_name = undef, $minion_name = undef,$alternate_flannel_interface_bind = false) {
   validate_string($master_name)
   validate_array($minion_name)
+  if not defined(class['kubernetes']){
+    class {'kubernetes':
+      master_name =>  $master_name,
+      minion_name =>  $minion_name,
+    }
+  }
   kubernetes::core{'master_core':
     master_name =>  $master_name,
     minion_name =>  $minion_name,

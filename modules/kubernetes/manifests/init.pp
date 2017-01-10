@@ -50,7 +50,7 @@
 #
 # Copyright 2015 Michael Stein
 #
- kubernetes($master_name, $minion_name, $populate_hosts = false) {
+class kubernetes($master_name, $minion_name, $populate_hosts = false){
     if $caller_module_name != $module_name {
       fail("Use of private class ${name} by ${caller_module_name}")
     }
