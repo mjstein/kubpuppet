@@ -57,8 +57,7 @@ class kubernetes::master($master_name = undef, $minion_name = undef,$alternate_f
       minion_name      => $minion_name, #can be hostname if dns setup
       master_is_minion =>   true,
     }
-    contain 'kubernetes'
 
     }
-  }
+  
 }
