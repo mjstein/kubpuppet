@@ -8,7 +8,7 @@ define kubernetes::core($master_name, $minion_name){
   file{'/etc/kubernetes/config':
     content => template('kubernetes/kub_config.erb'),
     require => Package['kubernetes'],
-    notify  =>  Service['kube-apiserver'],
+    notify  =>  Service['flanneld'],
   }
   file{'/etc/sysconfig/flanneld':
     content => template('kubernetes/flanneld.erb'),
