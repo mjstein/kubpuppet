@@ -8,10 +8,13 @@ class kubernetes::master($master_name = undef, $minion_name = undef,$alternate_f
       before      =>  Kubernetes::Core['master_core']
     }
   }
-  kubernetes::core{'master_core':
-    master_name =>  $master_name,
-    minion_name =>  $minion_name,
-  }->
+  unless defined(Kubernetes::Core['minion_core']){
+    kubernetes::core{'master_core':
+      master_name => $master_name,
+      minion_name => $minion_name,
+      before      =>  File['/etc/kubernetes/apiserver']
+    }
+  }
   file{'/etc/kubernetes/apiserver':
     content => template('kubernetes/apiserver.erb'),
     notify  => Service['kube-apiserver']
