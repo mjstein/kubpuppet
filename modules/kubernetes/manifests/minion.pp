@@ -16,7 +16,9 @@ class kubernetes::minion($master_name=undef, $minion_name=undef, $alternate_flan
   }
   file{'/etc/kubernetes/kubelet':
     content => template('kubernetes/kubelet.erb')
-  }~>
+    require => Package['kubernetes'],
+    notify  =>  Service['kubelet'],
+  }
   service{['kube-proxy','kubelet']:
     ensure => running,
     enable => true,

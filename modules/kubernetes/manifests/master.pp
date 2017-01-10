@@ -12,29 +12,33 @@ class kubernetes::master($master_name = undef, $minion_name = undef,$alternate_f
     kubernetes::core{'master_core':
       master_name => $master_name,
       minion_name => $minion_name,
-      before      =>  File['/etc/kubernetes/apiserver']
     }
   }
   file{'/etc/kubernetes/apiserver':
     content => template('kubernetes/apiserver.erb'),
-    notify  => Service['kube-apiserver']
-  }->
+    notify  => Service['kube-apiserver'],
+    require => Package['kubernetes'],
+    notify  =>  Service['kube-apiserver'],
+  }
   file{'/etc/kubernetes/controller-manager':
     content => template('kubernetes/controller.erb'),
     notify  => Service['kube-controller-manager']
-  }->
+    require =>  Package['kubernetes'],
+    notify  =>  Service['kube-controller-manager'],
+  }
 
   file{'/etc/etcd/etcd.conf':
     ensure  => present,
     source  => 'puppet:///modules/kubernetes/etcd_config',
     require => Package['etcd'],
     notify  => Service['etcd'],
-  }->
+  }
 
   service{['etcd', 'kube-apiserver', 'kube-controller-manager', 'kube-scheduler']:
-    ensure => running,
-    enable => true,
-  }->
+    ensure  => running,
+    enable  => true,
+    require =>  Package['kubernetes']
+  }
 
   file{'/tmp/flannel-config.json':
     ensure => present,
@@ -45,7 +49,7 @@ class kubernetes::master($master_name = undef, $minion_name = undef,$alternate_f
     path    => ['/bin'],
     command => "curl -L http://${::kubernetes::master_name}:4001/v2/keys/flannel/network/config -XPUT --data-urlencode value@/tmp/flannel-config.json",
     unless  => 'curl -L http://localhost:4001/v2/keys/flannel/network/config;if [ $? -eq 0 ]; then return 1; else return 0;fi', 
-    require => File['/tmp/flannel-config.json']
+    require => Service['etcd'],
   }
 
 
