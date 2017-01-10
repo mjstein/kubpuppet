@@ -50,25 +50,9 @@
 #
 # Copyright 2015 Michael Stein
 #
-class kubernetes($master_name, $minion_name, $populate_hosts = false) {
+ kubernetes($master_name, $minion_name, $populate_hosts = false) {
     if $caller_module_name != $module_name {
       fail("Use of private class ${name} by ${caller_module_name}")
     }
-
-  class{'kubernetes::hosts':
-    populate_hosts => $populate_hosts,
-  }
-  contain 'kubernetes::hosts'
-
-  package {['docker', 'docker-logrotate', 'kubernetes', 'etcd', 'flannel']:
-    ensure => present,
-  }->
-
-  file{'/etc/kubernetes/config':
-    content => template('kubernetes/kub_config.erb')
-  }->
-  file{'/etc/sysconfig/flanneld':
-    content => template('kubernetes/flanneld.erb'),
-  }
 
 }
