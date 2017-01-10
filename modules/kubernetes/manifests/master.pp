@@ -52,7 +52,7 @@ class kubernetes::master($master_name = undef, $minion_name = undef,$alternate_f
   }
 
   if $master_is_minion {
-    class{'kubernetes::minion'
+    class{'kubernetes::minion':
       master_name      => $master_name, #can be hostname if dns setup
       minion_name      => $minion_name, #can be hostname if dns setup
       master_is_minion =>   true,
