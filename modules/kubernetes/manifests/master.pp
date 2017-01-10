@@ -44,14 +44,6 @@ class kubernetes::master($master_name = undef, $minion_name = undef,$alternate_f
     command => "curl -L http://${::kubernetes::master_name}:4001/v2/keys/flannel/network/config -XPUT --data-urlencode value@/tmp/flannel-config.json",
     unless  => 'curl -L http://localhost:4001/v2/keys/flannel/network/config;if [ $? -eq 0 ]; then return 1; else return 0;fi', 
     require => File['/tmp/flannel-config.json']
-  }~>
-  service{'flanneld':
-    ensure => running,
-    enable => true,
-  }~>
-  service{'docker':
-    ensure => running,
-    enable => true,
   }
 
 
