@@ -18,7 +18,6 @@ class kubernetes::master($master_name = undef, $minion_name = undef,$alternate_f
     content => template('kubernetes/apiserver.erb'),
     notify  => Service['kube-apiserver'],
     require => Package['kubernetes'],
-    notify  =>  Service['kube-apiserver'],
   }
   file{'/etc/kubernetes/controller-manager':
     content => template('kubernetes/controller.erb'),
