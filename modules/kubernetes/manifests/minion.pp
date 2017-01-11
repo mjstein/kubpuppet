@@ -20,8 +20,9 @@ class kubernetes::minion($master_name=undef, $minion_name=undef, $alternate_flan
     notify  =>  Service['kubelet'],
   }
   service{['kube-proxy','kubelet']:
-    ensure => running,
-    enable => true,
+    ensure  => running,
+    enable  => true,
+    require =>  Package['kubernetes']
   }
 
 }

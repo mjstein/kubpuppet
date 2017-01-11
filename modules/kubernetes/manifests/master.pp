@@ -33,10 +33,15 @@ class kubernetes::master($master_name = undef, $minion_name = undef,$alternate_f
     notify  => Service['etcd'],
   }
 
-  service{['etcd', 'kube-apiserver', 'kube-controller-manager', 'kube-scheduler']:
+
+  service{'etcd':
     ensure  => running,
     enable  => true,
-    require =>  Package['kubernetes']
+  }
+  service{[ 'kube-apiserver', 'kube-controller-manager', 'kube-scheduler']:
+    ensure  => running,
+    enable  => true,
+    require =>  [Package['kubernetes'],Service['etcd']]
   }
 
   file{'/tmp/flannel-config.json':
