@@ -10,9 +10,10 @@ class kubernetes::master($master_name = undef, $minion_name = undef,$alternate_f
   }
   unless defined(Kubernetes::Core['minion_core']){
     kubernetes::core{'master_core':
-      master_name      => $master_name,
-      minion_name      => $minion_name,
-      master_is_minion =>  $master_is_minion,
+      master_name                       => $master_name,
+      minion_name                       => $minion_name,
+      master_is_minion                  => $master_is_minion,
+      alternate_flannel_interface_bind =>  $alternate_flannel_interface_bind 
     }
   }
   file{'/etc/kubernetes/apiserver':

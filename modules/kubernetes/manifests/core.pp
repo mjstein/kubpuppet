@@ -1,5 +1,5 @@
 
-define kubernetes::core($master_name, $minion_name, $master_is_minion=false){
+define kubernetes::core($master_name, $minion_name, $master_is_minion=false, $alternate_flannel_interface_bind =false ){
 
   package {['docker', 'docker-logrotate', 'kubernetes', 'etcd', 'flannel']:
     ensure => present,
