@@ -20,6 +20,11 @@ class kubernetes::minion($master_name=undef, $minion_name=undef, $alternate_flan
     require => Package['kubernetes'],
     notify  =>  Service['kubelet'],
   }
+  file{'/etc/kubernetes/proxy':
+    require => Package['kubernetes'],
+    source  =>  'puppet:///modules/kubernetes/proxy',
+    notify  => Service['kube-proxy'],
+  }
   service{['kube-proxy','kubelet']:
     ensure  => running,
     enable  => true,
